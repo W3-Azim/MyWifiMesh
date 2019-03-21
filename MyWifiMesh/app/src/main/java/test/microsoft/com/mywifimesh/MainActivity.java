@@ -1,5 +1,6 @@
 package test.microsoft.com.mywifimesh;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -58,6 +59,7 @@ public class MainActivity extends ActionBarActivity {
     GroupOwnerSocketHandler  groupSocket = null;
     ClientSocketHandler clientSocket = null;
     ChatManager chat = null;
+    @SuppressLint("HandlerLeak")
     Handler myHandler  = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -223,7 +225,7 @@ public class MainActivity extends ActionBarActivity {
                 String s = intent.getStringExtra(WifiServiceSearcher.DSS_WIFISS_INFOTEXT);
 
                 String[] separated = s.split(":");
-                print_line("SS", "found SSID:" + separated[1] + ", pwd:"  + separated[2]+ "IP: " + separated[3]);
+                print_line("SS", "found SSID:" + separated[1] + ", pwd:"  + separated[2]+ ", IP: " + separated[3]);
 
                 if(mWifiConnection == null) {
                     if(mWifiAccessPoint != null){
